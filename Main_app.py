@@ -12,6 +12,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import os
+import sys, subprocess, platform
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
@@ -1578,7 +1579,16 @@ def pdf_creator():
         #st.container(solar)
         #env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
         #template = env.get_template("template.html")
-
+        if platform.system() == "Windows":
+            pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
+        else:
+            os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
+            WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
+                stdout=subprocess.PIPE).communicate()[0].strip()
+            pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+        
+        
+        
 
         left.write("Fill in the data:")
         form = left.form("template_form")
@@ -1869,7 +1879,15 @@ def pdf_creator():
         #st.container(solar)
         #env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
         #template = env.get_template("template.html")
-
+        
+        if platform.system() == "Windows":
+            pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
+        else:
+            os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
+            WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
+                stdout=subprocess.PIPE).communicate()[0].strip()
+            pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+        
 
         left.write("Fill in the data:")
         form = left.form("template_form")
