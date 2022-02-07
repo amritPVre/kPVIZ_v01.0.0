@@ -30,7 +30,7 @@ import calendar
 import base64
 import plotly.io as pio
 #pio.kaleido.scope.default_format = "png"
-import wkhtmltopdf as html
+#import wkhtmltopdf as html
 from pdfkit.api import configuration
 import glob
 from scipy.optimize import fsolve
