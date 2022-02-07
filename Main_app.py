@@ -7,7 +7,7 @@ Created on Sat Dec 25 21:23:50 2021
 
 #when we import hydralit, we automatically get all of Streamlit
 import hydralit as hy
-import wkhtmltopdf as html
+#import wkhtmltopdf as html
 import streamlit as st
 import numpy as np
 import pandas as pd
